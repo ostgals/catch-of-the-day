@@ -2,7 +2,7 @@ import './css/style.css';
 
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter, Match, Miss } from 'react-router';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import App from './components/App';
 import StorePicker from './components/StorePicker';
@@ -10,14 +10,14 @@ import NotFound from './components/NotFound';
 
 const Root = () => {
   return (
-    <BrowserRouter>
-      <div>
-        <Match exactly pattern="/" component={StorePicker} />
-        <Match pattern="/store/:storeId" component={App} />
-        <Miss component={NotFound} />
-      </div>
-    </BrowserRouter>
+    <div>
+      <Switch>
+        <Route exact path="/" component={StorePicker} />
+        <Route path="/store/:storeId" component={App} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
   )
 }
 
-render(<Root/>, document.querySelector('#main'));
+render(<BrowserRouter><Root/></BrowserRouter>, document.querySelector('#main'));

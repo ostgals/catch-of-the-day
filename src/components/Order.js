@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatPrice } from '../helpers';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 class Order extends React.Component {
 

@@ -1,13 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getFunName } from '../helpers';
 
 class StorePicker extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const { history } = props;
+    this.history = history;
+  }
 
   goToStore(event) {
     event.preventDefault();
     const storeId = this.storeInput.value;
     console.log(`Going to store: ${storeId}`);
-    this.context.router.transitionTo(`/store/${storeId}`);
+    // this.context.router.transitionTo(`/store/${storeId}`);
+    this.history.push(`/store/${storeId}`);
   }
 
   render() {
@@ -19,7 +27,7 @@ class StorePicker extends React.Component {
           ref={ (input) => this.storeInput = input }
           onDoubleClick={() => this.storeInput.value = 'plain-thoughtless-fungi'}
         />
-        <button type="submit">Enter The Store 😛</button>
+        <button type="submit">Enter The Store <span role="img" aria-label="smile">😛</span></button>
       </form>
     );
   }
@@ -27,7 +35,7 @@ class StorePicker extends React.Component {
 }
 
 StorePicker.contextTypes = {
-  router: React.PropTypes.object
+  router: PropTypes.object
 };
 
 export default StorePicker;

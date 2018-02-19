@@ -8,12 +8,15 @@ import sampleFishes from '../sample-fishes';
 import base from './base';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
+      storeId: props.match.params.storeId,
       fishes: {},
       order: {}
     };
+
     this.bindMethods(
       'loadSamples',
       'addFish',
@@ -22,6 +25,7 @@ class App extends React.Component {
       'addToOrder',
       'removeFromOrder'
     );
+
   }
 
   bindMethods(...methods) {
@@ -29,7 +33,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.syncRef = base.syncState(`${this.props.params.storeId}/fishes`, {
+    this.syncRef = base.syncState(`${this.state.storeId}/fishes`, {
     // this.syncRef = base.syncState(`plain-thoughtless-fungi/fishes`, {
       context: this,
       state: 'fishes'
@@ -114,7 +118,7 @@ class App extends React.Component {
           updateFish={ this.updateFish }
           removeFish={ this.removeFish }
           loadSamples={ this.loadSamples }
-          storeId={this.props.params.storeId}
+          storeId={this.state.storeId}
         />
       </div>
     )
